@@ -109,3 +109,132 @@ void troca(int *a, int *b){
 }
 
 //6
+#include <stdio.h>
+
+void divisao(int dividendo, int divisor, int *quociente, int *resto);
+
+int main() {
+    int dividendo, divisor;
+    int quociente, resto;
+
+    printf("Digite o dividendo: ");
+    scanf("%d", &dividendo);
+
+    printf("Digite o divisor: ");
+    scanf("%d", &divisor);
+
+    if (divisor == 0) {
+        printf("Erro: divisao por zero nao eh permitida.\n");
+    } else {
+        divisao(dividendo, divisor, &quociente, &resto);
+
+        printf("Quociente = %d\n", quociente);
+        printf("Resto = %d\n", resto);
+    }
+
+    return 0;
+}
+
+void divisao(int dividendo, int divisor, int *quociente, int *resto) {
+    *quociente = dividendo / divisor;
+    *resto = dividendo % divisor;
+}
+
+//7
+#include <stdio.h>
+
+void maior(int *p1, int *p2, int **pMaior);
+
+int main() {
+    int a, b;
+    int *resultado;  
+
+    printf("Digite o primeiro numero: ");
+    scanf("%d", &a);
+
+    printf("Digite o segundo numero: ");
+    scanf("%d", &b);
+
+    maior(&a, &b, &resultado);
+
+    printf("Maior valor = %d\n", *resultado);
+    printf("Endereco do maior valor = %p\n", (void*)resultado);
+
+    return 0;
+}
+
+void maior(int *p1, int *p2, int **pMaior) {
+    if (*p1 > *p2) {
+        *pMaior = p1;
+    } else {
+        *pMaior = p2;
+    }
+}
+
+//8
+#include <stdio.h>
+
+int main() {
+    char nome[] = "Ponteiros";
+    char *p = nome;  
+
+    while (*p != '\0') {
+        printf("%c\n", *p);  
+        p++;                 
+    }
+
+    return 0;
+}
+
+//9
+#include <stdio.h>
+
+typedef struct {
+    int id;
+    float preco;
+} Livro;
+
+int main() {
+    Livro meuLivro; 
+    Livro *ptrLivro;     
+
+    ptrLivro = &meuLivro;  
+
+    ptrLivro->id = 101;
+    ptrLivro->preco = 59.90;
+
+    printf("ID do livro: %d\n", ptrLivro->id);
+    printf("Preco do livro: %.2f\n", ptrLivro->preco);
+
+    return 0;
+}
+
+//10
+#include <stdio.h>
+
+typedef struct {
+    int pontos;
+    int nivel;
+} Jogador;
+
+void ganhar_ponto(Jogador *j) {
+    j->pontos += 1;  
+    if (j->pontos >= 10) {
+        j->nivel += 1;     
+        j->pontos = 0;     
+    }
+}
+
+int main() {
+    Jogador jogador1 = {8, 1};  
+
+    printf("Antes: Pontos = %d, Nivel = %d\n", jogador1.pontos, jogador1.nivel);
+
+    ganhar_ponto(&jogador1); 
+    printf("Depois de ganhar 1 ponto: Pontos = %d, Nivel = %d\n", jogador1.pontos, jogador1.nivel);
+
+    ganhar_ponto(&jogador1);  
+    printf("Depois de ganhar outro ponto: Pontos = %d, Nivel = %d\n", jogador1.pontos, jogador1.nivel);
+
+    return 0;
+}
